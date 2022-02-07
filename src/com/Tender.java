@@ -37,24 +37,30 @@ public class Tender {
     public Brigade startQualify(Brigade... brigades) throws NoSuitableOfferException {
         double lowestProposal = objectPrice;
         int brigadeWinner = -1;
-        for (int i = 0; i < brigades.length; i++) {
-            HashMap<Skills, Integer> brigadeCapabilities = new HashMap<>();
-            for (Employee employee : brigades[i].getWorkers()) {
-                for (Skills skill : employee.getSkillSet()) {
-                    if (!brigadeCapabilities.containsKey(skill)) brigadeCapabilities.put(skill, 1);
-                    else brigadeCapabilities.put(skill, brigadeCapabilities.get(skill) + 1);
+        for (int i = 0; i < brigades.length; i++)
+            check:{
+                HashMap<Skills, Integer> brigadeCapabilities = new HashMap<>();
+                for (Employee employee : brigades[i].getWorkers()) {
+                    for (Skills skill : employee.getSkillSet()) {
+                        if (!brigadeCapabilities.containsKey(skill)) brigadeCapabilities.put(skill, 1);
+                        else brigadeCapabilities.put(skill, brigadeCapabilities.get(skill) + 1);
+                    }
                 }
-            }
-            for (Map.Entry<Skills,Integer> entry: brigadeRequirements.entrySet()) {
+                for (Map.Entry<Skills, Integer> entry : brigadeRequirements.entrySet()) {
                     Skills key = entry.getKey();
                     Integer value = entry.getValue();
-                    if ((!brigadeCapabilities.containsKey(key) && (!(brigadeCapabilities.get(key) >= value)))) break;
-                    if (brigades[i].getProposal() <= lowestProposal) {
-                        lowestProposal = brigades[i].getProposal();
-                        brigadeWinner = i;
+                    if (!brigadeCapabilities.containsKey(key)) break check;
+                    else {
+                        if (brigadeCapabilities.get(key) < value) {
+                            break check;
+                        }
                     }
+                }
+                if (brigades[i].getProposal() <= lowestProposal) {
+                    lowestProposal = brigades[i].getProposal();
+                    brigadeWinner = i;
+                }
             }
-        }
         if (brigadeWinner == -1) throw new NoSuitableOfferException
                 ("Тендер закрыт в связи с отсуствием предложений, отвечающих условиям проведения закупки");
         return brigades[brigadeWinner];

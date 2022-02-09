@@ -8,5 +8,5 @@ public enum Skills {
     FITTER,
     BETWORKER,
     DRIVER,
-    NETWORKER;
+    NETWORKER
 }

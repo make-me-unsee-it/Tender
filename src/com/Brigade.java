@@ -1,40 +1,31 @@
 package com;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Objects;
 
 public class Brigade {
-    private ArrayList<Employee> workers;
-    private double proposal;
+    private final ArrayList<Employee> workers;
+    private final BigDecimal proposal;
 
-    public Brigade (double proposal, Employee ... employees) {
+    public Brigade (BigDecimal proposal, ArrayList<Employee> employees) {
         this.proposal = proposal;
-        workers = new ArrayList<>();
-        Collections.addAll(workers, employees);
+        workers = employees;
     }
 
     public ArrayList<Employee> getWorkers() {
         return workers;
     }
 
-    public double getProposal() {
+    public BigDecimal getProposal() {
         return proposal;
-    }
-
-    public void workersAdd(Employee employee) {
-        workers.add(employee);
-    }
-
-    public void setProposal(double proposal) {
-        this.proposal = proposal;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Brigade brigade)) return false;
-        return Double.compare(brigade.proposal, proposal) == 0 && Objects.equals(workers, brigade.workers);
+        return Objects.equals(workers, brigade.workers) && Objects.equals(proposal, brigade.proposal);
     }
 
     @Override

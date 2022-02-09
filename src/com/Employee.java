@@ -8,7 +8,7 @@ public class Employee {
     private HashSet<Skills> skillSet;
     private final String name;
 
-    public Employee(String name, Skills ... skill) {
+    public Employee(String name, Skills... skill) {
         this.name = name;
         skillSet = new HashSet<>();
         Collections.addAll(skillSet, skill);
@@ -18,12 +18,12 @@ public class Employee {
         return skillSet;
     }
 
-    public void skillAdd(Skills skill) {
-        skillSet.add(skill);
-    }
-
     public String getName() {
         return name;
+    }
+
+    public void skillAdd(Skills skill) {
+        skillSet.add(skill);
     }
 
     @Override

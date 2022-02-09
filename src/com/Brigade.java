@@ -22,12 +22,11 @@ public class Brigade {
         return proposal;
     }
 
-    public void workersAdd(Employee employee) {
-        workers.add(employee);
-    }
-
     public void setProposal(double proposal) {
         this.proposal = proposal;
+    }
+    public void workersAdd(Employee employee) {
+        workers.add(employee);
     }
 
     @Override

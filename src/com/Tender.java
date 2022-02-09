@@ -20,6 +20,18 @@ public class Tender {
         brigadeRequirements.put(skill, count);
     }
 
+    public String getTenderName() {
+        return tenderName;
+    }
+
+    public BigDecimal getTenderPrice() {
+        return tenderPrice;
+    }
+
+    public LinkedHashMap<Skills, Integer> getBrigadeRequirements() {
+        return brigadeRequirements;
+    }
+
     public Brigade startQualify(ArrayList<Brigade> brigades) throws NoSuitableOfferException {
         BigDecimal lowestProposal = tenderPrice;
         int brigadeWinner = -1;

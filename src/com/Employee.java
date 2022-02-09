@@ -12,6 +12,10 @@ public class Employee {
         skillSet = skills;
     }
 
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
     public HashSet<Skills> getSkillSet() {
         return skillSet;
     }

@@ -1,48 +1,38 @@
 package com;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 
 public class Employee {
-    private HashSet<Skills> skillSet;
-    private final String name;
+    private final HashSet<Skills> skillSet;
+    private final String employeeName;
 
-    public Employee(String name, Skills... skill) {
-        this.name = name;
-        skillSet = new HashSet<>();
-        Collections.addAll(skillSet, skill);
+    public Employee(String name, HashSet<Skills> skills) {
+        this.employeeName = name;
+        skillSet = skills;
     }
 
     public HashSet<Skills> getSkillSet() {
         return skillSet;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void skillAdd(Skills skill) {
-        skillSet.add(skill);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Employee employee)) return false;
-        return Objects.equals(skillSet, employee.skillSet) && Objects.equals(name, employee.name);
+        return Objects.equals(skillSet, employee.skillSet) && Objects.equals(employeeName, employee.employeeName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(skillSet, name);
+        return Objects.hash(skillSet, employeeName);
     }
 
     @Override
     public String toString() {
         return "Employee{" +
                 "skillSet=" + skillSet +
-                ", name='" + name + '\'' +
+                ", name='" + employeeName + '\'' +
                 '}';
     }
 }
